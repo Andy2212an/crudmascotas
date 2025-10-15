@@ -8,7 +8,7 @@ import mascotasRoutes from "./routes/mascotas.js";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080; // Cambia 3000 por 8080
 
 // Necesario para obtener __dirname en módulos ES
 const __filename = fileURLToPath(import.meta.url);
