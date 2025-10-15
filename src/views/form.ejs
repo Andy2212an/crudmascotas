@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title || 'Mascota' %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const razaSelect = document.getElementById('Raza');
+      const especieSelect = document.getElementById('Especie');
+
+      const razasPorEspecie = {
+        'Perro': ['Labrador', 'Bulldog', 'Beagle', 'Otro'],
+        'Gato': ['Siames', 'Persa', 'Maine Coon', 'Otro'],
+        'Ave': ['Guacamayo', 'Canario', 'Otro'],
+        'Pez': ['Betta', 'Goldfish', 'Otro'],
+        'Otro': ['Otro']
+      };
+
+      const fillRazas = (especie, selected) => {
+        razaSelect.innerHTML = '';
+        const def = document.createElement('option');
+        def.value = '';
+        def.textContent = 'Seleccione una raza (opcional)';
+        razaSelect.appendChild(def);
+        (razasPorEspecie[especie] || []).forEach(r => {
+          const opt = document.createElement('option');
+          opt.value = r; opt.textContent = r; if (r === selected) opt.selected = true; razaSelect.appendChild(opt);
+        });
+      };
+
+      especieSelect.addEventListener('change', () => fillRazas(especieSelect.value, ''));
+
+      // Inicializar si viene especie precargada
+      const selectedRaza = razaSelect.getAttribute('data-selected') || '';
+      fillRazas(especieSelect.value, selectedRaza);
+    });
+  </script>
+  <style> body{ padding-bottom:40px } </style>
+</head>
+<body class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0"><%= title || 'Mascota' %></h5>
+          <a href="/" class="btn btn-outline-secondary btn-sm">Volver</a>
+        </div>
+        <div class="card-body">
+          <form action="<%= action %>" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="Nombre" name="Nombre" value="<%= mascota?.Nombre || '' %>" required>
+              </div>
+              <div class="col-md-3">
+                <label for="Especie" class="form-label">Especie</label>
+                <select class="form-select" id="Especie" name="Especie" required>
+                  <option value="" disabled <%= (mascota?.Especie ? '' : 'selected') %>>Seleccione una especie</option>
+                  <option value="Perro" <%= mascota?.Especie==='Perro'?'selected':'' %>>Perro</option>
+                  <option value="Gato" <%= mascota?.Especie==='Gato'?'selected':'' %>>Gato</option>
+                  <option value="Ave" <%= mascota?.Especie==='Ave'?'selected':'' %>>Ave</option>
+                  <option value="Pez" <%= mascota?.Especie==='Pez'?'selected':'' %>>Pez</option>
+                  <option value="Otro" <%= mascota?.Especie==='Otro'?'selected':'' %>>Otro</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="Raza" class="form-label">Raza</label>
+                <select class="form-select" id="Raza" name="Raza" data-selected="<%= (mascota && mascota.Raza) ? mascota.Raza : '' %>">
+                  <option value="">Seleccione una raza (opcional)</option>
+                </select>
+              </div>
+
+              <div class="col-md-3">
+                <label for="Edad" class="form-label">Edad</label>
+                <input type="number" class="form-control" id="Edad" name="Edad" min="0" value="<%= mascota?.Edad ?? '' %>">
+              </div>
+              <div class="col-md-3">
+                <label for="Sexo" class="form-label">Sexo</label>
+                <select class="form-select" id="Sexo" name="Sexo">
+                  <option value="" <%= !mascota?.Sexo?'selected':'' %>>Seleccione</option>
+                  <option value="M" <%= mascota?.Sexo==='M'?'selected':'' %>>M</option>
+                  <option value="F" <%= mascota?.Sexo==='F'?'selected':'' %>>F</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="Color" class="form-label">Color</label>
+                <input type="text" class="form-control" id="Color" name="Color" value="<%= mascota?.Color || '' %>">
+              </div>
+              <div class="col-md-3">
+                <label for="Peso" class="form-label">Peso (kg)</label>
+                <input type="number" class="form-control" id="Peso" name="Peso" step="0.01" min="0" value="<%= mascota?.Peso ?? '' %>">
+              </div>
+
+              <div class="col-md-6">
+                <label for="NombreDueno" class="form-label">Nombre Dueño</label>
+                <input type="text" class="form-control" id="NombreDueno" name="NombreDueno" value="<%= mascota?.NombreDueno || '' %>">
+              </div>
+              <div class="col-md-3">
+                <label for="TelefonoDueno" class="form-label">Teléfono Dueño</label>
+                <input type="text" class="form-control" id="TelefonoDueno" name="TelefonoDueno" value="<%= mascota?.TelefonoDueno || '' %>">
+              </div>
+              <div class="col-md-3">
+                <label for="DireccionDueno" class="form-label">Dirección Dueño</label>
+                <input type="text" class="form-control" id="DireccionDueno" name="DireccionDueno" value="<%= mascota?.DireccionDueno || '' %>">
+              </div>
+
+              <div class="col-md-4">
+                <label for="FechaVacunacion" class="form-label">Fecha Vacunación</label>
+                <input type="date" class="form-control" id="FechaVacunacion" name="FechaVacunacion" value="<%= (mascota?.FechaVacunacion ? new Date(mascota.FechaVacunacion).toISOString().slice(0,10) : '') %>">
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <a href="/" class="btn btn-light">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
