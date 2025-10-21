@@ -2,6 +2,11 @@
 
 Aplicación Node.js (Express + EJS) con SQL Server (Azure) para gestionar mascotas.
 
+## Visualización del proyecto en línea
+Si el enlace principal proporcionado no funciona, puedes acceder al proyecto desplegado en Azure a través del siguiente enlace alternativo:
+
+🔗 **[crudmascotas-hubehbfddxhrcrh8.brazilsouth-01.azurewebsites.net](https://crudmascotas-hubehbfddxhrcrh8.brazilsouth-01.azurewebsites.net)**
+
 ## Ejecutar en local
 - Copia `.env` (no se sube) con variables:
 ```
@@ -21,7 +26,4 @@ DB_PORT=1433
 - Asegura acceso del App Service a Azure SQL (firewall/Allow Azure services).
 - Usa Deployment Center o GitHub Actions.
 
-## Visualización del proyecto en línea
-Si el enlace principal proporcionado no funciona, puedes acceder al proyecto desplegado en Azure a través del siguiente enlace alternativo:
 
-🔗 **[crudmascotas-hubehbfddxhrcrh8.brazilsouth-01.azurewebsites.net](https://crudmascotas-hubehbfddxhrcrh8.brazilsouth-01.azurewebsites.net)**
