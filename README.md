@@ -20,3 +20,8 @@ DB_PORT=1433
 - Configura las App Settings con las variables del `.env`.
 - Asegura acceso del App Service a Azure SQL (firewall/Allow Azure services).
 - Usa Deployment Center o GitHub Actions.
+
+## Visualización del proyecto en línea
+Si el enlace principal proporcionado no funciona, puedes acceder al proyecto desplegado en Azure a través del siguiente enlace alternativo:
+
+🔗 **[crudmascotas-hubehbfddxhrcrh8.brazilsouth-01.azurewebsites.net](https://crudmascotas-hubehbfddxhrcrh8.brazilsouth-01.azurewebsites.net)**
